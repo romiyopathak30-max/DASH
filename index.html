@@ -1,1022 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Romiyo Pathak | Portfolio</title>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap');
-
-    :root {
-      --cyan: #00f7ff;
-      --purple: #9d00ff;
-      --pink: #ff00a8;
-      --dark: #050816;
-      --card: rgba(255,255,255,0.07);
-      --text: #f5f7ff;
-      --muted: #aab3d1;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Poppins", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 10% 10%, #18205d 0, transparent 35%),
-        radial-gradient(circle at 90% 20%, #40105b 0, transparent 30%),
-        var(--dark);
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 8%;
-      background: rgba(5, 8, 22, 0.85);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(0,247,255,0.2);
-    }
-
-    .logo {
-      font-family: "Orbitron", sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--cyan);
-      text-shadow: 0 0 15px var(--cyan);
-    }
-
-    nav ul {
-      display: flex;
-      gap: 25px;
-      list-style: none;
-    }
-
-    nav a {
-      color: white;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--cyan);
-      text-shadow: 0 0 10px var(--cyan);
-    }
-
-    .menu-btn {
-      display: none;
-      border: 1px solid var(--cyan);
-      background: transparent;
-      color: var(--cyan);
-      padding: 7px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 20px;
-    }
-
-    section {
-      padding: 90px 8%;
-    }
-
-    .hero {
-      min-height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 50px;
-    }
-
-    .hero-content {
-      max-width: 650px;
-    }
-
-    .tag {
-      display: inline-block;
-      color: var(--cyan);
-      border: 1px solid var(--cyan);
-      padding: 8px 15px;
-      border-radius: 30px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 18px rgba(0,247,255,0.2);
-    }
-
-    h1 {
-      font-family: "Orbitron", sans-serif;
-      font-size: clamp(38px, 7vw, 78px);
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    h1 span {
-      color: var(--cyan);
-      text-shadow: 0 0 20px var(--cyan);
-    }
-
-    .typing {
-      color: var(--pink);
-      font-size: 22px;
-      min-height: 35px;
-      font-weight: 700;
-    }
-
-    .hero p {
-      color: var(--muted);
-      margin: 20px 0;
-      line-height: 1.8;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 25px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 13px 24px;
-      border-radius: 30px;
-      border: 1px solid var(--cyan);
-      color: white;
-      font-weight: 700;
-      transition: 0.3s;
-      cursor: pointer;
-      background: transparent;
-    }
-
-    .btn.primary {
-      color: #001018;
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      border: none;
-    }
-
-    .btn:hover {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 0 25px rgba(0,247,255,0.5);
-    }
-
-    .avatar {
-      width: 280px;
-      height: 280px;
-      flex-shrink: 0;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      font-family: "Orbitron", sans-serif;
-      font-size: 75px;
-      font-weight: 800;
-      color: white;
-      background:
-        linear-gradient(var(--dark), var(--dark)) padding-box,
-        linear-gradient(135deg, var(--cyan), var(--purple), var(--pink)) border-box;
-      border: 7px solid transparent;
-      box-shadow:
-        0 0 25px var(--cyan),
-        0 0 70px rgba(157,0,255,0.7);
-      animation: float 4s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .section-title {
-      text-align: center;
-      font-family: "Orbitron", sans-serif;
-      font-size: clamp(28px, 5vw, 45px);
-      margin-bottom: 45px;
-    }
-
-    .section-title span {
-      color: var(--cyan);
-    }
-
-    .about-box,
-    .contact-box,
-    .game-box {
-      max-width: 850px;
-      margin: auto;
-      padding: 35px;
-      background: var(--card);
-      border: 1px solid rgba(0,247,255,0.25);
-      border-radius: 25px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.25);
-    }
-
-    .about-box p {
-      color: var(--muted);
-      line-height: 1.9;
-      text-align: center;
-    }
-
-    .skills {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
-    }
-
-    .skill {
-      padding: 25px;
-      text-align: center;
-      background: var(--card);
-      border: 1px solid rgba(157,0,255,0.4);
-      border-radius: 18px;
-      transition: 0.3s;
-    }
-
-    .skill:hover {
-      transform: translateY(-8px);
-      border-color: var(--cyan);
-      box-shadow: 0 0 25px rgba(0,247,255,0.25);
-    }
-
-    .skill .icon {
-      font-size: 38px;
-      margin-bottom: 10px;
-    }
-
-    .skill h3 {
-      font-size: 17px;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 25px;
-    }
-
-    .project {
-      background: var(--card);
-      border: 1px solid rgba(0,247,255,0.25);
-      border-radius: 20px;
-      padding: 25px;
-      transition: 0.3s;
-    }
-
-    .project:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 25px rgba(157,0,255,0.35);
-    }
-
-    .project h3 {
-      color: var(--cyan);
-      margin-bottom: 12px;
-    }
-
-    .project p {
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .project-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      padding: 9px 18px;
-      border-radius: 25px;
-      border: 1px solid var(--purple);
-      color: white;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--purple);
-      box-shadow: 0 0 15px rgba(157,0,255,0.5);
-    }
-
-    .game-box {
-      text-align: center;
-    }
-
-    .game-box p {
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    #flappyCanvas {
-      display: block;
-      width: 100%;
-      max-width: 400px;
-      height: auto;
-      margin: auto;
-      border-radius: 18px;
-      background: #72d7ff;
-      border: 2px solid var(--cyan);
-      touch-action: manipulation;
-    }
-
-    .game-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .game-score {
-      margin-top: 20px;
-      color: var(--cyan) !important;
-      font-weight: 800;
-      font-size: 18px;
-    }
-
-    #flappyMessage {
-      min-height: 25px;
-      margin-top: 10px;
-      color: white !important;
-    }
-
-    form {
-      display: grid;
-      gap: 15px;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(0,247,255,0.4);
-      outline: none;
-      background: rgba(0,0,0,0.25);
-      color: white;
-      font-family: inherit;
-    }
-
-    textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 15px rgba(0,247,255,0.2);
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: var(--muted);
-      border-top: 1px solid rgba(0,247,255,0.2);
-    }
-
-    footer span {
-      color: var(--cyan);
-    }
-
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 18px;
-    }
-
-    .socials a {
-      color: var(--cyan);
-      font-weight: 700;
-    }
-
-    .socials a:hover {
-      color: var(--pink);
-    }
-
-    @media (max-width: 800px) {
-      .hero {
-        flex-direction: column-reverse;
-        text-align: center;
-        justify-content: center;
-      }
-
-      .buttons {
-        justify-content: center;
-      }
-
-      .avatar {
-        width: 210px;
-        height: 210px;
-        font-size: 55px;
-      }
-
-      nav ul {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        padding: 25px;
-        flex-direction: column;
-        text-align: center;
-        background: #080b20;
-      }
-
-      nav ul.show {
-        display: flex;
-      }
-
-      .menu-btn {
-        display: block;
-      }
-    }
-
-    @media (max-width: 500px) {
-      section {
-        padding: 65px 5%;
-      }
-
-      .about-box,
-      .contact-box,
-      .game-box {
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 39px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Romiyo Pathak — Creative Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10192d;--muted:#60718b;--blue:#2867ed;--purple:#8657f5;
+  --bg:#f7f9ff;--card:#ffffffd9;--line:#e5eaf3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,sans-serif;color:var(--ink);background:
+ radial-gradient(circle at 8% 25%,#dce8ff 0,transparent 34%),
+ radial-gradient(circle at 85% 70%,#eee8ff 0,transparent 38%),var(--bg);
+ min-height:100vh;overflow-x:hidden}
+body.dark{--ink:#f5f8ff;--muted:#a7b5cb;--bg:#080f1f;--card:#101b30e8;--line:#26344d;
+ background:radial-gradient(circle at 10% 20%,#172c55 0,transparent 34%),radial-gradient(circle at 90% 70%,#291b55 0,transparent 38%),var(--bg)}
+a{text-decoration:none;color:inherit}
+.container{width:min(1060px,90%);margin:auto}
+nav{position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(1065px,92%);
+ height:55px;margin-top:0;background:var(--card);backdrop-filter:blur(20px);
+ border:1px solid #fff;border-radius:0 0 20px 20px;box-shadow:0 15px 40px #263c6810;z-index:20}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.logo{font:800 16px Orbitron;letter-spacing:1px}.logo:after{content:"";color:var(--blue)}
+.logo span{color:var(--blue)}
+.nav-links{display:flex;gap:27px;color:var(--muted);font-size:13px}
+.nav-links a:hover{color:var(--blue)}
+.theme{width:37px;height:37px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink)}
+.hero{min-height:880px;display:flex;align-items:center;padding-top:75px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:25px;align-items:center}
+.eyebrow{font:800 12px Orbitron;letter-spacing:3px;color:var(--blue);margin-bottom:27px}
+h1{font:900 clamp(3.5rem,6.2vw,5.5rem)/.88 Orbitron;letter-spacing:-4px;margin-bottom:30px}
+h1 div:nth-child(3){color:var(--blue)}
+.hero-copy{font-size:14px;line-height:2.05;color:var(--muted);max-width:530px}
+.hero-copy b{color:var(--ink)}
+.actions{display:flex;gap:13px;margin-top:29px}
+.btn{padding:14px 21px;border-radius:12px;font-size:14px;font-weight:700;border:1px solid var(--line);background:var(--card)}
+.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 12px 24px #2867ed30}
+.btn:hover{transform:translateY(-3px)}
+.visual{position:relative;height:430px;display:grid;place-items:center}
+.rings{position:absolute;width:350px;height:350px;border:1px dashed #cbd7ef;border-radius:50%;transform:rotate(-25deg)}
+.rings:before,.rings:after{content:"";position:absolute;inset:35px;border:1px solid #8ba9ff;border-radius:50%;transform:rotate(65deg)}
+.rings:after{inset:0;border-color:#b7a2ff;transform:rotate(-65deg)}
+.core{width:245px;height:245px;border-radius:50%;display:grid;place-items:center;
+ background:radial-gradient(circle at 35% 30%,#dce5ff,#c4d1ff 45%,#e5ddff);
+ box-shadow:0 0 80px #9db9ff75;border:1px solid #b8c9f5;position:relative}
+.anchor{font-size:86px;filter:drop-shadow(0 10px 8px #5173ba55);animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px) rotate(-4deg)}}
+.dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--blue);box-shadow:0 0 15px #2867ed80}
+.dot.one{top:55px;right:75px}.dot.two{bottom:55px;right:12px;background:#8a46ef}.dot.three{bottom:70px;left:55px;background:#35bde8}
+.pill{position:absolute;background:var(--card);border:1px solid #fff;box-shadow:0 12px 30px #243b6515;border-radius:13px;padding:13px 16px;font-size:12px;font-weight:700}
+.pill.top{right:0;top:70px}.pill.bottom{left:0;bottom:55px}
+.signature{position:absolute;bottom:15px;text-align:center;font:700 12px Orbitron;letter-spacing:2px}
+.signature small{display:block;font:10px Inter;letter-spacing:3px;color:var(--muted);margin-top:8px}
+section{padding:90px 0}
+.section-title{text-align:center;margin-bottom:35px}
+.kicker{color:var(--blue);font:800 11px Orbitron;letter-spacing:2px}
+h2{font:800 34px Orbitron;margin:10px 0}
+.section-title p{color:var(--muted);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:25px;box-shadow:0 15px 40px #263c6809}
+.card h3{font:700 17px Orbitron;margin:12px 0}
+.card p{color:var(--muted);font-size:13px;line-height:1.8}
+.icon{font-size:36px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.tag{font-size:11px;padding:6px 9px;border-radius:99px;background:#2867ed12;color:var(--blue);font-weight:700}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.contact{max-width:700px;margin:auto}
+form{display:grid;gap:13px}input,textarea{padding:14px;border:1px solid var(--line);border-radius:12px;background:transparent;color:var(--ink);width:100%;font:inherit}textarea{min-height:130px}
+footer{text-align:center;padding:28px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+
+.game-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:center}
+.game-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:12px;box-shadow:0 15px 40px #263c6810}
+.game-top{display:flex;justify-content:space-between;gap:10px;padding:8px 10px;color:var(--muted);font-size:12px;font-weight:700}
+.game-stage{position:relative;overflow:hidden;border-radius:16px;background:#bdefff}
+#gameCanvas{display:block;width:100%;height:auto;touch-action:manipulation}
+.game-overlay{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;background:#07111fb8;color:white}
+.game-overlay.hidden{display:none}
+.game-overlay>div{background:#10243df2;border:1px solid #ffffff30;border-radius:18px;padding:24px;max-width:260px}
+.game-overlay h3{font:800 20px Orbitron;margin-bottom:8px}
+.game-overlay p{font-size:12px;color:#d6e2f5;margin-bottom:18px}
+.game-info ul{margin:18px 0;padding-left:20px;color:var(--muted);font-size:13px;line-height:2}
+.game-buttons{display:flex;flex-wrap:wrap;gap:8px}
+
+@media(max-width:800px){
+ nav{width:100%;border-radius:0}.nav-links{display:none}.hero{min-height:auto;padding:130px 0 50px}
+ .hero-grid,.about-grid,.game-layout{grid-template-columns:1fr}.hero{text-align:center}.hero-copy{margin:auto}.actions{justify-content:center}
+ .visual{height:360px}.pill.top{right:4%}.pill.bottom{left:4%}.cards{grid-template-columns:1fr}
+ h1{letter-spacing:-2px}
+}
+
+/* Interactive upgrades */
+.nav-links a.active{color:var(--blue);font-weight:800}
+.menu-btn{display:none;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:8px 11px}
+.toast{position:fixed;right:22px;bottom:22px;z-index:50;background:var(--ink);color:var(--bg);padding:14px 18px;border-radius:13px;box-shadow:0 12px 30px #0002;opacity:0;transform:translateY(15px);pointer-events:none;transition:.25s;font-size:13px}
+.toast.show{opacity:1;transform:none}
+.reveal{opacity:0;transform:translateY(24px);transition:.7s ease}
+.reveal.visible{opacity:1;transform:none}
+.card,.btn,.theme,.tag{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.card[data-clickable]{cursor:pointer}
+.card[data-clickable]:hover{transform:translateY(-7px);box-shadow:0 20px 45px #263c6818;border-color:#9bb9ff}
+.btn:active,.theme:active{transform:scale(.96)}
+.modal{position:fixed;inset:0;display:grid;place-items:center;background:#07111fb8;z-index:40;padding:20px;opacity:0;pointer-events:none;transition:.2s}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-box{width:min(520px,100%);background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:22px;padding:28px;position:relative;box-shadow:0 25px 80px #0003}
+.modal-close{position:absolute;right:15px;top:12px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:50%;width:32px;height:32px}
+.modal-box p{color:var(--muted);font-size:14px;line-height:1.8;margin:12px 0}
+.skill-progress{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:15px}
+.skill-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--purple));transition:1s}
+#backTop{position:fixed;right:22px;bottom:80px;width:42px;height:42px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:50%;z-index:30;opacity:0;pointer-events:none;transition:.2s}
+#backTop.show{opacity:1;pointer-events:auto}
+@media(max-width:800px){
+ .menu-btn{display:block}.nav-links{position:absolute;top:60px;left:0;right:0;display:none;flex-direction:column;gap:0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px}
+ .nav-links.open{display:flex}.nav-links a{padding:12px}
+}
+
+</style>
 </head>
-
 <body>
+<nav><div class="nav-inner"><a class="logo" href="#home">ROMIYO<span>.</span></a><div class="nav-links" id="navLinks"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#game">Game</a><a href="#contact">Contact</a></div><div style="display:flex;gap:8px;align-items:center"><button class="menu-btn" id="menuBtn">☰</button><button class="theme" id="theme">☾</button></div></div></nav>
 
-  <nav>
-    <div class="logo">ROMIYO.DEV</div>
+<header class="hero" id="home"><div class="container hero-grid">
+<div>
+<div class="eyebrow">GRADE 8 · CREATIVE DEVELOPER</div>
+<h1><div>DREAM.</div><div>CREATE.</div><div>EXPLORE.</div></h1>
+<p class="hero-copy">Hi, I’m <b>Romiyo Pathak.</b> I enjoy creating websites, experimenting with code, designing digital experiences, and exploring new ideas like a true future pirate.</p>
+<div class="actions"><a class="btn primary" href="#projects">Explore Projects →</a><a class="btn" href="#contact">Contact Me</a></div>
+</div>
+<div class="visual"><div class="rings"></div><div class="core"><div class="anchor">⚓</div></div><div class="dot one"></div><div class="dot two"></div><div class="dot three"></div><div class="pill top">🏴‍☠️ &nbsp; Future Pirate King</div><div class="pill bottom">💻 &nbsp; Building the future</div><div class="signature">ROMIYO PATHAK<small>CREATIVE DEVELOPER</small></div></div>
+</div></header>
 
-    <button class="menu-btn" id="menuBtn">☰</button>
+<section id="about"><div class="container"><div class="section-title"><div class="kicker">CAPTAIN'S LOG</div><h2>About Me</h2><p>A curious mind with a creative mission.</p></div><div class="about-grid"><div class="card"><div class="icon">🌊</div><h3>My mission</h3><p>Learn new things, build exciting projects, and turn imagination into something people can use and enjoy.</p></div><div class="card"><div class="icon">🚀</div><h3>My vision</h3><p>Keep improving my coding, design, and problem-solving skills while exploring the endless world of technology.</p></div></div></div></section>
 
-    <ul id="navLinks">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#game">Game</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<section id="skills"><div class="container"><div class="section-title"><div class="kicker">MY TOOLKIT</div><h2>Skills</h2><p>Tools I’m learning and using to create.</p></div><div class="cards"><div class="card" data-clickable data-skill="Web Design"><div class="icon">🌐</div><h3>Web Design</h3><p>Creating clean, responsive, and attractive websites.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Responsive UI</span></div></div><div class="card" data-clickable data-skill="Programming"><div class="icon">⚙️</div><h3>Programming</h3><p>Exploring logic, interactions, animations, and browser games.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">Canvas</span><span class="tag">Problem solving</span></div></div><div class="card" data-clickable data-skill="Creative Skills"><div class="icon">✨</div><h3>Creative Skills</h3><p>Combining storytelling, visual design, curiosity, and teamwork.</p><div class="tags"><span class="tag">Creativity</span><span class="tag">Design</span><span class="tag">Teamwork</span></div></div></div></div></section>
 
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <div class="tag">Welcome to my digital world 🚀</div>
+<section id="projects"><div class="container"><div class="section-title"><div class="kicker">TREASURE CHEST</div><h2>Projects</h2><p>Ideas turned into digital adventures.</p></div><div class="cards"><div class="card" data-clickable data-project="Personal Portfolio"><div class="icon">🖥️</div><h3>Personal Portfolio</h3><p>A modern portfolio with a custom identity, responsive layout, and dark mode.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div></div><div class="card" data-clickable data-project="Sky Flapper"><div class="icon">🎮</div><h3>Sky Flapper</h3><p>A browser game featuring obstacles, coins, score tracking, and keyboard or touch controls.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">Canvas</span></div></div><div class="card" data-clickable data-project="Next Adventure"><div class="icon">🧭</div><h3>Next Adventure</h3><p>A new project is waiting to be discovered. The next chapter is coming soon.</p><div class="tags"><span class="tag">Coming soon</span></div></div></div></div></section>
 
-      <h1>
-        Hi, I'm <span>Romiyo</span><br />
-        Pathak
-      </h1>
-
-      <div class="typing" id="typingText"></div>
-
-      <p>
-        I'm a Grade 8 student who loves technology, coding,
-        creativity, and building cool digital projects.
-      </p>
-
-      <div class="buttons">
-        <a href="#projects" class="btn primary">View My Projects</a>
-        <a href="#contact" class="btn">Contact Me</a>
+<section id="game"><div class="container">
+<div class="section-title"><div class="kicker">MINI ARCADE</div><h2>Sky Flapper</h2><p>Tap, click, or press Space to fly through the gates and collect coins.</p></div>
+<div class="game-layout">
+  <div class="game-card">
+    <div class="game-top"><span>Score: <b id="score">0</b></span><span>Best: <b id="best">0</b></span><span id="gameStatus">Ready</span></div>
+    <div class="game-stage">
+      <canvas id="gameCanvas" width="520" height="600"></canvas>
+      <div class="game-overlay" id="gameOverlay">
+        <div><h3 id="overlayTitle">Ready, captain?</h3><p id="overlayText">Press start to begin your voyage.</p><button class="btn primary" id="startGame">Start Game 🚀</button></div>
       </div>
     </div>
-
-    <div class="avatar">RP</div>
-  </section>
-
-  <section id="about">
-    <h2 class="section-title">About <span>Me</span></h2>
-
-    <div class="about-box">
-      <p>
-        Hello! My name is Romiyo Pathak. I am currently studying in
-        Grade 8. I enjoy learning HTML, CSS, JavaScript, gaming,
-        designing websites, and exploring new technology.
-        My goal is to become a skilled developer and create amazing
-        websites and applications.
-      </p>
-    </div>
-  </section>
-
-  <section id="skills">
-    <h2 class="section-title">My <span>Skills</span></h2>
-
-    <div class="skills">
-      <div class="skill">
-        <div class="icon">🌐</div>
-        <h3>HTML</h3>
-      </div>
-
-      <div class="skill">
-        <div class="icon">🎨</div>
-        <h3>CSS</h3>
-      </div>
-
-      <div class="skill">
-        <div class="icon">⚡</div>
-        <h3>JavaScript</h3>
-      </div>
-
-      <div class="skill">
-        <div class="icon">🎮</div>
-        <h3>Game Design</h3>
-      </div>
-
-      <div class="skill">
-        <div class="icon">💡</div>
-        <h3>Creativity</h3>
-      </div>
-
-      <div class="skill">
-        <div class="icon">🚀</div>
-        <h3>Problem Solving</h3>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2 class="section-title">My <span>Projects</span></h2>
-
-    <div class="project-buttons">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="web">Websites</button>
-      <button class="filter-btn" data-filter="game">Games</button>
-    </div>
-
-    <div class="projects">
-      <div class="project" data-category="web">
-        <h3>🌐 Portfolio Website</h3>
-        <p>
-          A modern personal portfolio website made using HTML,
-          CSS, and JavaScript.
-        </p>
-      </div>
-
-      <div class="project" data-category="game">
-        <h3>🎮 Flappy RP</h3>
-        <p>
-          A Flappy Bird-style game where you control a bird and
-          avoid pipes to get the highest score.
-        </p>
-      </div>
-
-      <div class="project" data-category="web">
-        <h3>💻 Landing Page</h3>
-        <p>
-          A futuristic landing page with glowing effects,
-          responsive design, and smooth animations.
-        </p>
-      </div>
-
-      <div class="project" data-category="game">
-        <h3>🕹️ Mini Game Concept</h3>
-        <p>
-          A collection of creative game ideas designed for
-          future coding projects.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="game">
-    <h2 class="section-title">Play <span>Flappy RP</span></h2>
-
-    <div class="game-box">
-      <p>
-        Tap the screen, click the game, or press SPACE to fly.
-        Avoid the pipes and beat your best score!
-      </p>
-
-      <canvas id="flappyCanvas" width="400" height="600"></canvas>
-
-      <div class="game-buttons">
-        <button class="btn primary" id="startFlappy">Start Game</button>
-        <button class="btn" id="restartFlappy">Restart</button>
-      </div>
-
-      <p class="game-score">
-        Score: <span id="flappyScore">0</span>
-        | Best: <span id="flappyBest">0</span>
-      </p>
-
-      <p id="flappyMessage">Press Start or SPACE to play</p>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2 class="section-title">Contact <span>Me</span></h2>
-
-    <div class="contact-box">
-      <form id="contactForm">
-        <input type="text" id="name" placeholder="Your Name" required />
-        <input type="email" id="email" placeholder="Your Email" required />
-        <textarea id="messageInput" placeholder="Your Message" required></textarea>
-        <button class="btn primary" type="submit">Send Message</button>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <p>
-      © <span id="year"></span> <span>Romiyo Pathak</span>.
-      Made with 💙 and code.
-    </p>
-
-    <div class="socials">
-      <a href="https://github.com/" target="_blank">GitHub</a>
-      <a href="https://instagram.com/" target="_blank">Instagram</a>
-      <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-    </div>
-  </footer>
-
-  <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const navLinks = document.getElementById("navLinks");
-
-    menuBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-    });
-
-    document.querySelectorAll("#navLinks a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("show");
-      });
-    });
-
-    const typingText = document.getElementById("typingText");
-    const words = [
-      "Grade 8 Student 📚",
-      "Beginner Web Developer 💻",
-      "Creative Designer 🎨",
-      "Future Tech Expert 🚀"
-    ];
-
-    let wordIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-
-    function typeEffect() {
-      const currentWord = words[wordIndex];
-
-      if (!deleting) {
-        typingText.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-
-        if (charIndex === currentWord.length) {
-          deleting = true;
-          setTimeout(typeEffect, 1300);
-          return;
-        }
-      } else {
-        typingText.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-
-        if (charIndex === 0) {
-          deleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-        }
-      }
-
-      setTimeout(typeEffect, deleting ? 45 : 85);
-    }
-
-    typeEffect();
-
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const projects = document.querySelectorAll(".project");
-
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        filterButtons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-
-        const filter = button.dataset.filter;
-
-        projects.forEach(project => {
-          project.style.display =
-            filter === "all" || project.dataset.category === filter
-              ? "block"
-              : "none";
-        });
-      });
-    });
-
-    document.getElementById("contactForm").addEventListener("submit", event => {
-      event.preventDefault();
-
-      const name = document.getElementById("name").value;
-      alert(
-        "Thanks, " + name +
-        "! This is a demo contact form. Connect it to a backend to receive real messages."
-      );
-
-      event.target.reset();
-    });
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    /* FLAPPY RP GAME */
-
-    const canvas = document.getElementById("flappyCanvas");
-    const ctx = canvas.getContext("2d");
-
-    const startButton = document.getElementById("startFlappy");
-    const restartButton = document.getElementById("restartFlappy");
-    const scoreText = document.getElementById("flappyScore");
-    const bestText = document.getElementById("flappyBest");
-    const gameMessage = document.getElementById("flappyMessage");
-
-    let bird;
-    let pipes;
-    let score;
-    let bestScore = Number(localStorage.getItem("flappyBestScore")) || 0;
-    let gameRunning = false;
-    let gameOver = false;
-    let animationId;
-    let pipeTimer = 0;
-
-    const gravity = 0.38;
-    const jumpPower = -6.5;
-    const pipeWidth = 65;
-    const pipeGap = 155;
-    const pipeSpeed = 2.5;
-
-    bestText.textContent = bestScore;
-
-    function resetGame() {
-      bird = {
-        x: 85,
-        y: 280,
-        radius: 17,
-        velocity: 0
-      };
-
-      pipes = [];
-      score = 0;
-      pipeTimer = 0;
-      gameOver = false;
-
-      scoreText.textContent = score;
-      gameMessage.textContent = "Tap, click, or press SPACE to fly";
-    }
-
-    function startGame() {
-      if (gameRunning) return;
-
-      resetGame();
-      gameRunning = true;
-      gameMessage.textContent = "Fly, little RP!";
-      gameLoop();
-    }
-
-    function restartGame() {
-      cancelAnimationFrame(animationId);
-      gameRunning = false;
-      startGame();
-    }
-
-    function flap() {
-      if (!gameRunning) {
-        startGame();
-      }
-
-      if (!gameOver) {
-        bird.velocity = jumpPower;
-      }
-    }
-
-    function createPipe() {
-      const topHeight = Math.floor(Math.random() * 260) + 50;
-
-      pipes.push({
-        x: canvas.width,
-        top: topHeight,
-        bottom: topHeight + pipeGap,
-        passed: false
-      });
-    }
-
-    function drawBackground() {
-      const sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      sky.addColorStop(0, "#55d9ff");
-      sky.addColorStop(1, "#d5f9ff");
-
-      ctx.fillStyle = sky;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "rgba(255,255,255,0.8)";
-      drawCloud(70, 100);
-      drawCloud(290, 180);
-      drawCloud(180, 60);
-
-      ctx.fillStyle = "#55b83e";
-      ctx.fillRect(0, canvas.height - 45, canvas.width, 45);
-
-      ctx.fillStyle = "#d7b35c";
-      ctx.fillRect(0, canvas.height - 12, canvas.width, 12);
-    }
-
-    function drawCloud(x, y) {
-      ctx.beginPath();
-      ctx.arc(x, y, 18, 0, Math.PI * 2);
-      ctx.arc(x + 22, y - 12, 25, 0, Math.PI * 2);
-      ctx.arc(x + 48, y, 18, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function drawBird() {
-      ctx.save();
-
-      ctx.translate(bird.x, bird.y);
-      ctx.rotate(Math.min(Math.PI / 4, bird.velocity * 0.08));
-
-      ctx.fillStyle = "#ffe600";
-      ctx.beginPath();
-      ctx.arc(0, 0, bird.radius, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = "#ff9d00";
-      ctx.beginPath();
-      ctx.ellipse(-5, 7, 13, 8, -0.3, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = "white";
-      ctx.beginPath();
-      ctx.arc(7, -7, 7, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = "black";
-      ctx.beginPath();
-      ctx.arc(9, -7, 3, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = "#ff6b00";
-      ctx.beginPath();
-      ctx.moveTo(14, 0);
-      ctx.lineTo(30, 7);
-      ctx.lineTo(14, 12);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.restore();
-    }
-
-    function drawPipes() {
-      pipes.forEach(pipe => {
-        const pipeGradient = ctx.createLinearGradient(
-          pipe.x,
-          0,
-          pipe.x + pipeWidth,
-          0
-        );
-
-        pipeGradient.addColorStop(0, "#168c27");
-        pipeGradient.addColorStop(0.5, "#49d84c");
-        pipeGradient.addColorStop(1, "#08751c");
-
-        ctx.fillStyle = pipeGradient;
-
-        ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
-        ctx.fillRect(pipe.x - 6, pipe.top - 25, pipeWidth + 12, 25);
-
-        ctx.fillRect(
-          pipe.x,
-          pipe.bottom,
-          pipeWidth,
-          canvas.height - pipe.bottom
-        );
-
-        ctx.fillRect(
-          pipe.x - 6,
-          pipe.bottom,
-          pipeWidth + 12,
-          25
-        );
-      });
-    }
-
-    function updateGame() {
-      bird.velocity += gravity;
-      bird.y += bird.velocity;
-
-      pipeTimer++;
-
-      if (pipeTimer > 95) {
-        createPipe();
-        pipeTimer = 0;
-      }
-
-      pipes.forEach(pipe => {
-        pipe.x -= pipeSpeed;
-
-        if (!pipe.passed && pipe.x + pipeWidth < bird.x) {
-          pipe.passed = true;
-          score++;
-          scoreText.textContent = score;
-        }
-
-        const hitPipe =
-          bird.x + bird.radius > pipe.x &&
-          bird.x - bird.radius < pipe.x + pipeWidth &&
-          (
-            bird.y - bird.radius < pipe.top ||
-            bird.y + bird.radius > pipe.bottom
-          );
-
-        if (hitPipe) {
-          endGame();
-        }
-      });
-
-      pipes = pipes.filter(pipe => pipe.x + pipeWidth > -20);
-
-      if (
-        bird.y - bird.radius < 0 ||
-        bird.y + bird.radius > canvas.height - 45
-      ) {
-        endGame();
-      }
-    }
-
-    function endGame() {
-      if (gameOver) return;
-
-      gameOver = true;
-      gameRunning = false;
-      cancelAnimationFrame(animationId);
-
-      if (score > bestScore) {
-        bestScore = score;
-        localStorage.setItem("flappyBestScore", bestScore);
-        bestText.textContent = bestScore;
-      }
-
-      gameMessage.textContent = "Game Over! Press Restart or SPACE";
-    }
-
-    function drawGame() {
-      drawBackground();
-      drawPipes();
-      drawBird();
-
-      ctx.fillStyle = "rgba(0,0,0,0.25)";
-      ctx.font = "bold 42px Arial";
-      ctx.textAlign = "center";
-      ctx.fillText(score, canvas.width / 2, 65);
-    }
-
-    function gameLoop() {
-      if (!gameRunning) return;
-
-      updateGame();
-      drawGame();
-
-      if (gameRunning) {
-        animationId = requestAnimationFrame(gameLoop);
-      }
-    }
-
-    startButton.addEventListener("click", startGame);
-    restartButton.addEventListener("click", restartGame);
-
-    canvas.addEventListener("pointerdown", event => {
-      event.preventDefault();
-      flap();
-    });
-
-    document.addEventListener("keydown", event => {
-      if (event.code === "Space") {
-        event.preventDefault();
-
-        if (gameOver) {
-          restartGame();
-        } else {
-          flap();
-        }
-      }
-    });
-
-    resetGame();
-    drawGame();
-  </script>
+  </div>
+  <div class="card game-info"><div class="icon">🎮</div><h3>How to play</h3><p>Keep the little sky pirate flying. Avoid the green gates and collect gold coins for bonus points.</p><ul><li>Space / ↑ = flap</li><li>Click or tap the game = flap</li><li>Pause and resume anytime</li><li>Your best score saves automatically</li></ul><div class="game-buttons"><button class="btn primary" id="flap">🪽 Flap</button><button class="btn" id="pause">⏸ Pause</button><button class="btn" id="resetBest">↻ Reset best</button></div></div>
+</div></div></section>
+
+<section id="contact"><div class="container contact"><div class="section-title"><div class="kicker">SEND A MESSAGE</div><h2>Contact Me</h2><p>Have an idea or a friendly message? Send it below.</p></div><div class="card"><form id="form"><input required placeholder="Your name"><input required type="email" placeholder="Your email"><textarea required placeholder="Your message"></textarea><button class="btn primary" type="submit">Send Message ✉</button><p id="note" style="color:var(--muted);font-size:12px"></p></form></div></div></section>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="closeModal" aria-label="Close">×</button>
+    <h2 id="modalTitle">Details</h2>
+    <p id="modalText"></p>
+    <div class="skill-progress" id="progressWrap"><span id="progressBar"></span></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<button id="backTop" aria-label="Back to top">↑</button>
+
+<footer>Built with curiosity, creativity, and pirate energy. © <span id="year"></span> Romiyo Pathak.</footer>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+const theme=$('#theme'), menuBtn=$('#menuBtn'), navLinks=$('#navLinks');
+if(localStorage.getItem('theme')==='dark'){document.body.classList.add('dark');theme.textContent='☀'}
+theme.onclick=()=>{document.body.classList.toggle('dark');const d=document.body.classList.contains('dark');theme.textContent=d?'☀':'☾';localStorage.setItem('theme',d?'dark':'light');showToast(d?'Dark mode enabled':'Light mode enabled')};
+menuBtn.onclick=()=>{navLinks.classList.toggle('open');menuBtn.textContent=navLinks.classList.contains('open')?'×':'☰'};
+$$('.nav-links a').forEach(a=>a.onclick=()=>navLinks.classList.remove('open'));
+
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+$$('section,.hero .container,.card').forEach(el=>{el.classList.add('reveal');observer.observe(el)});
+
+const sections=$$('header[id],section[id]');
+const navItems=$$('.nav-links a');
+window.addEventListener('scroll',()=>{
+ let current='home';
+ sections.forEach(s=>{if(scrollY>=s.offsetTop-180)current=s.id});
+ navItems.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
+ $('#backTop').classList.toggle('show',scrollY>500);
+});
+$('#backTop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+const modal=$('#modal'),modalTitle=$('#modalTitle'),modalText=$('#modalText'),progress=$('#progressBar');
+function openModal(title,text,percent=0){modalTitle.textContent=title;modalText.textContent=text;progress.style.width=percent+'%';modal.classList.add('open')}
+function closeModal(){modal.classList.remove('open')}
+$('#closeModal').onclick=closeModal;
+modal.onclick=e=>{if(e.target===modal)closeModal()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+const skillInfo={
+'Web Design':['I enjoy making layouts, buttons, colors, and responsive pages that work on phones and computers.',85],
+'Programming':['I am learning JavaScript, game logic, events, animations, and how websites respond to users.',70],
+'Creative Skills':['I use imagination, visual storytelling, teamwork, and experimentation to make projects unique.',90]
+};
+$$('[data-skill]').forEach(card=>card.onclick=()=>{const [text,p]=skillInfo[card.dataset.skill];openModal(card.dataset.skill,text,p)});
+
+const projectInfo={
+'Personal Portfolio':'This portfolio uses responsive design, a custom visual identity, smooth scrolling, dark mode, interactive cards, and a working contact demo.',
+'Sky Flapper':'Sky Flapper is a browser game with keyboard, mouse, and touch controls, obstacles, coins, score tracking, pause/resume, and saved best scores.',
+'Next Adventure':'This is a clickable idea slot for my next project. It could become a quiz, a larger game, a study tool, or something completely new.'
+};
+$$('[data-project]').forEach(card=>card.onclick=()=>openModal(card.dataset.project,projectInfo[card.dataset.project],100));
+
+$('#form').onsubmit=e=>{
+ e.preventDefault();
+ const name=e.target.querySelector('input').value.trim();
+ $('#note').textContent=`Thanks, ${name || 'captain'}! Your message was prepared successfully. This demo form is not connected to email yet.`;
+ showToast('Message prepared successfully ✉');
+ e.target.reset();
+};
+function showToast(message){const t=$('#toast');t.textContent=message;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
+$('#year').textContent=new Date().getFullYear();
+
+/* Game */
+const canvas=$('#gameCanvas'),ctx=canvas.getContext('2d');
+let bird,pipes,coins,score=0,best=Number(localStorage.getItem('sky-flapper-best')||0);
+let playing=false,paused=false,lastTime=0,pipeTimer=0,coinTimer=0;
+$('#best').textContent=best;
+function resetGame(){bird={x:125,y:270,vy:0,r:16};pipes=[];coins=[];score=0;pipeTimer=0;coinTimer=0;$('#score').textContent=0;$('#gameStatus').textContent='Ready'}
+function startGame(){resetGame();playing=true;paused=false;$('#gameOverlay').classList.add('hidden');$('#gameStatus').textContent='Flying';lastTime=performance.now();requestAnimationFrame(gameLoop)}
+function flap(){if(!playing||paused)return;bird.vy=-360}
+function addPipe(){const gap=Math.max(130,175-score*.8),top=55+Math.random()*(canvas.height-gap-150);pipes.push({x:canvas.width+20,top,gap,w:60,passed:false})}
+function addCoin(){coins.push({x:canvas.width+20,y:70+Math.random()*(canvas.height-150),r:10})}
+function hitPipe(p){return bird.x+bird.r>p.x&&bird.x-bird.r<p.x+p.w&&(bird.y-bird.r<p.top||bird.y+bird.r>p.top+p.gap)}
+function endGame(){playing=false;$('#gameStatus').textContent='Game over';if(score>best){best=score;localStorage.setItem('sky-flapper-best',best);$('#best').textContent=best}$('#overlayTitle').textContent='Voyage over!';$('#overlayText').textContent='Score: '+score+' • Best: '+best;$('#startGame').textContent='Try again ↻';$('#gameOverlay').classList.remove('hidden');showToast('Game over! Score: '+score)}
+function drawGame(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+const g=ctx.createLinearGradient(0,0,0,canvas.height);g.addColorStop(0,'#b9efff');g.addColorStop(1,'#fff0b6');ctx.fillStyle=g;ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle='#ffffff80';for(let i=0;i<7;i++){ctx.beginPath();ctx.arc((i*97+score*2)%canvas.width,65+(i%3)*55,18,0,Math.PI*2);ctx.fill()}
+pipes.forEach(p=>{ctx.fillStyle='#18a66b';ctx.fillRect(p.x,0,p.w,p.top);ctx.fillRect(p.x,p.top+p.gap,p.w,canvas.height);ctx.fillStyle='#087b4c';ctx.fillRect(p.x-6,p.top-12,p.w+12,12);ctx.fillRect(p.x-6,p.top+p.gap,p.w+12,12)});
+coins.forEach(c=>{ctx.fillStyle='#ffc857';ctx.beginPath();ctx.arc(c.x,c.y,c.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#805500';ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.fillText('$',c.x,c.y+4)});
+ctx.save();ctx.translate(bird.x,bird.y);ctx.rotate(Math.max(-.5,Math.min(.8,bird.vy/650)));ctx.fillStyle='#2867ed';ctx.beginPath();ctx.arc(0,0,bird.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(6,-5,5,0,Math.PI*2);ctx.fill();ctx.fillStyle='#14213b';ctx.beginPath();ctx.arc(7,-5,2,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ffc857';ctx.beginPath();ctx.moveTo(14,0);ctx.lineTo(27,6);ctx.lineTo(14,10);ctx.closePath();ctx.fill();ctx.restore();
+}
+function gameLoop(t){if(!playing)return;if(paused){lastTime=t;requestAnimationFrame(gameLoop);return}const dt=Math.min((t-lastTime)/1000,.035);lastTime=t;bird.vy+=1050*dt;bird.y+=bird.vy*dt;pipeTimer+=dt;coinTimer+=dt;if(pipeTimer>.95){pipeTimer=0;addPipe()}if(coinTimer>1.5){coinTimer=0;addCoin()}
+pipes.forEach(p=>{p.x-=(210+score*2)*dt;if(!p.passed&&p.x+p.w<bird.x){p.passed=true;score++;$('#score').textContent=score}});
+coins.forEach(c=>c.x-=(210+score*2)*dt);
+coins=coins.filter(c=>{if(Math.hypot(c.x-bird.x,c.y-bird.y)<c.r+bird.r){score+=2;$('#score').textContent=score;return false}return c.x>-30});
+pipes=pipes.filter(p=>p.x>-90);
+if(bird.y-bird.r<0||bird.y+bird.r>canvas.height||pipes.some(hitPipe)){endGame();return}drawGame();requestAnimationFrame(gameLoop)}
+$('#startGame').onclick=startGame;$('#flap').onclick=flap;canvas.addEventListener('pointerdown',flap);
+document.addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();if(!playing)startGame();else flap()}});
+$('#pause').onclick=()=>{if(!playing)return;paused=!paused;$('#pause').textContent=paused?'▶ Resume':'⏸ Pause';$('#gameStatus').textContent=paused?'Paused':'Flying'};
+$('#resetBest').onclick=()=>{best=0;localStorage.removeItem('sky-flapper-best');$('#best').textContent=0;showToast('Best score reset')};
+resetGame();drawGame();
+</script>
 
 </body>
 </html>
+
+    
